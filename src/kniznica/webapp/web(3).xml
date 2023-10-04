@@ -1,0 +1,37 @@
+<servlet>
+    <servlet-name>KniznicaDtb</servlet-name>
+    <servlet-class>com.example.KniznicaDtb</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>KniznicaDtb</servlet-name>
+    <url-pattern>/url</url-pattern>
+</servlet-mapping>
+
+
+
+<!-- <persons_list>
+      <person category="čitateľ">
+            <person_name>Pavol</person_name>
+            <person_last_name>Koloman</person_last_name>
+            <library_card>321</library_card>
+            <book_list>Čarovny les,Strmhlav</book_list>
+      </person>
+      <person category="čitateľ">
+            <person_name>Jan</person_name>
+            <person_last_name>Gašpar</person_last_name>
+            <library_card>2290</library_card>
+            <book_list>Matematika pre náročných</book_list>
+      </person>
+      <person category="čitateľ">
+            <person_name>Karolína</person_name>
+            <person_last_name>Zemanová</person_last_name>
+            <library_card>18</library_card>
+            <book_list>Divoký aniel,Stratená láska,Plač</book_list>
+      </person>
+      <person category="čitateľ">
+            <person_name>Sponkeboop</person_name>
+            <person_last_name>Squerpants</person_last_name>
+            <library_card>321</library_card>
+            <book_list>Plankton a jeho využitie</book_list>
+      </person>
+</persons_list> -->

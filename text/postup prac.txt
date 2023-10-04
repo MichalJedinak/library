@@ -1,0 +1,45 @@
+K dnešnému dňu postup prác na GIU
+
+1), vytvorené 5 Tried - a), MyFrame
+                      - b), BorrowePanel
+                      - c), AddNewBookPanel
+                      - d), SlectTables
+                      - e),SqlFunction 
+a), MyFrame  obsahuje
+  - hlavný panel 
+  - MenuBar 
+  - Menu - item menu - new book
+         - item menu - new person
+         - item menu - new borrowed
+         - item menu - borrowed books
+         - item menu - book in library
+   na všetky item menu sú naviazané Action Listener 
+  - new book - open new panel AddNewBookPanel
+  - new borrowed - open new panel BorrowedPanel
+  - osatné sú v príprave - new person 
+                         - borrowe books ( buď JTable alebo Jlabel s výpisom)
+                         - book in library obdoba borrowed book
+b), obsahuje 
+   - nadis Nová výpožička
+   - popis údajov na vloženie
+   - JtextField pre person a pre book - tu je naviazaný ActionListener ktroý                                       
+     otvorý JScrollPanel z d),SelectTables
+   - po kliknutí na udaje s JTable sa prepíše údaj do JTextField (person,book)
+   - ak klikneme na person field otvorý sa tabulka s persons a zatvori tabulka 
+     s books a opačne (zatiaľ book cklick prepíše text fo book fielde
+   - Jbutton prepojený s SqlFunctions funciou insertNewBorrowedToDatabaseTableBorrowed()
+c), obsahuje
+   - hlavný panel s - Jpanel - 5x JTextField pre (title,author,genre,amout,binding)
+                    - JPanel - 5x JLabel (title,author,genre,amout,binding)
+                    - Jbutton - SqlFunctions.insertNewBookInDatabaseTabelBooks()
+d), obsahuje JScrollPanel s JTable a funkcie getTabel a replaceTable 
+    a podmienku na naviazanie ActionListener
+e),obsahuje funkcie -1. insertNewPersonToDatabaseTablePersons()
+                    -2.  showNameFromDatabaseTablePersons()
+                    -3.  insertNewBookToDatabaseTableBooks(String title, String author, Genre genre,double amout, Binding binding)
+e)1. je takmer rozpracovaná
+  2. hotová ukáže  do konzoli meno z databzy podla počiatočného písmena 
+  3. takmer hotová už len opraviť prepojenie s udajmi shelf_row
+
+
+      

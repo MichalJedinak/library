@@ -1,0 +1,147 @@
+ (SQL DATABASE MySQL
+
+CREATE DATABASE nazov;  vytvorenie databazy
+USE nazov; ked sme znovu ccheli robiť s databazou
+ALTER DATABASE nazov READ ONLY = 1; je v mode na čitanie neda sa dropnut ak je = 0 da sa dropnut
+
+ALTER DATABASE nazov ENCRYPTION = 'Y';
+
+CREATE TABLE nazov 
+             (column_1 INT),
+             (column_2 VARCHAR(50znakov)),
+             (colum_3  BOOLEAN),
+             (columnm_4 DATATIME DEFAULT NOW() 
+  or other type DECIMAL(5,2) , LONG,
+
+RENAME TABLE nazov TO novynazov;
+             ;
+SELECT * FROM nazovT; hladanie v konkretnej tabulke
+
+SELECT * FROM nazovT WHERE nazovColumn a podmienka napr > 2 alebo = "meno autora";
+
+ALTER TABLE nazov ADD COLUMN nazovColumn;                     vlož novy stlpec do tabulky
+ALTER TABLE nazov MODIFY COLUMN nazov INT/VARCHAR()/......    other Values uprav tip 
+ALTER TABLE nazov RENAME COLUMN  nazov to nazovnovy;          premenuj na ine
+ALTER TABLE nazovT MODIFY nazov VARCHAR()  AFTER nazov za ktory chceme prsunzut modifikovany nazov
+                                           FIRST ak ma byt na zaciatku
+ALTER TABLE nazov DROP COLUMN nazov;
+
+ALTER TABLE nazovT DROP COLUMN nazov toho co ccheme dropnut
+
+INSERT INTO nazov  VALUES(valuees);vlozit do tabulky novy udaj  všetky hodnoty  zadať čo su v tabulke alebo uviesť ktore zapoisujeme do (.....)
+INSERT INTO nazovTabulky (nazov konkretnych Column, ....,...)
+Values(value,value,....);
+
+úprava udajov   update test set  my_date =""  WHERE id = 1;
+UPDATE nazov 
+SET nazov column = hodnota z column or null
+WHERE nazovColumn napr ID = 4;
+
+DELETE FROM nazov 
+WHERE nazov =  hotnota;
+
+SEt AUTOCOMMIT = OFF; COMMIT  ROLLBACK
+
+BEZPE4NOSTNY RE6IM SQL   neda sa DELETOVAT 
+vypnuty SET SQL_SAFE_UPDATES = 0;   zapnuty SET SQL_SAFE_UPDATES = 1;
+
+
+CREATE TABLE zamestnanci (
+   zamestnanec_id INT,
+   meno VARCHAR(50),
+   hodinova_mzda DECCIMAL(5,2),
+  zamestnany_datum *DATE,
+  CONSTRAINT  chk_hodinova_mzda CHECK (hodinova_mzda >= 10.00);
+or
+ALTER TABLE zamestnanci
+ADD CONSTRAINT chk_hodinova_mzda CHECK(hodinova_mzda >=10.00);
+ALTER  TABLE zamestanci
+DROP CHECK chk_hodinova_mzda;
+
+CREATE TABLE products (
+    produkt_id int,
+   produkt_meno VARCHAR(25) UNIQUE,
+   cena DECIMAL(4?2) DEFAULT 0);
+
+CREATE TABLE products (
+    produkt_id int,
+   produkt_meno VARCHAR(25),
+   cena DECIMAL(4?2) DEFAULT 0);
+or if table exist 
+ALTER TABLE LATER cena SET DEFAUL 0;
+
+if is set default value is not nessesery write cena value
+INSET INTO produkts (produkt_id,produkt_meno)
+   VALUES( 104,"tavar"),
+          (105,TOVAR_2"),
+          (106,"tovar_3");
+default value is seting automaticly
+
+CREATE TABLE transaction(
+              transaction_id INT ,
+			  amount DECIMAL( 5,2),
+              transaction_date DATETIME DEFAULT NOW()
+  );            
+INSERT INTO transaction (transaction_id,amount)
+VALUES(1,4.99);
+select *from transaction;
+'1', '4.99', '2023-06-27 12:42:27'
+
+CREATE TABLE transactions (
+    transaction_id int PRIMARY KEY,
+     );
+ALTER TABLE transactions
+ADD CONSTRAINT 
+PRIMARY KEY (transaction_id);
+
+CREATE TABLE transactions (
+    transaction_id int PRIMARY KEY AUTO_INCREMENT,
+   amount DECIMAL(5,2) DEFAULT 0
+   );
+
+FUNKCIE SQL 
+SELECT COUNT(nazov_column) FROM nazov_table;( COUNT() AS pipis vrati počet riadkov v stlpci
+SELECT MAX(...) AS maximalna_hodnota FROM nazov_table; 
+MIN()  vrati minimalnu hodnotu s riadkov
+SUM() vrati sumár všetkých riadkov v column
+CONCAT()
+SELECT CONCAT(person_name," ",person_lastName)AS cele_meno FROM pesron;
+vráti viac hodnôt z tabulky ako spojeny retazec
+INSERT INTO table_name (id, column1, column2, ...)
+SELECT 1, column1, column2, ...
+FROM (
+  SELECT id, column1, column2, ...,
+    ROW_NUMBER() OVER (ORDER BY id) AS rn
+
+
+  FROM table_name
+) t
+WHERE id = 1;
+
+CREATE TABLE books_borrowed (
+    person_id INT NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (person_id)
+        REFERENCES kniznica.person (person_id)
+        MATCH SIMPLE
+        ON UPDATE NO ACTION,
+    FOREIGN KEY (book_id)
+        REFERENCES kniznica.kniha (book_id)
+        MATCH SIMPLE
+        ON UPDATE NO ACTION,
+    day_of_borrowing DATETIME DEFAULT NOW(),
+    day_of_return DATE DEFAULT 'NOW()+30'
+); 
+/////////// VIEWS //////////////////
+  a virtual tebla based on the result-set of SQL statment The fields in a view are fields from one or more real tables in the database
+theyˇre not real table,  but can be interacted whih as if were
+
+virtuálna tabuľka založená na množine výsledkov príkazu SQL Polia v zobrazení sú polia z jednej alebo viacerých reálnych tabuliek v databáze
+nie sú skutočným stolom, ale možno s nimi interagovať, ako keby boli
+
+CREATE VIEW borrowed_book AS SELECT book_id,book_title FROM books;
+//// INNER LEFT RIGHT
+
+SELECT * FROM table_name INNER JOIN table_name_from ON table_name.colum_name_id = table_nema_from-colum_name_id;
+
+SELECT * FROM person INNER JOIN genders ON person.gender = genders.id_gender;

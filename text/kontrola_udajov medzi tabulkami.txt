@@ -1,0 +1,23 @@
+          rooms      shelf   shelw_row 
+
+marti 1   4  x       35 x     175 je 20 (155)
+martin s  3  x       25 x     125 je 10  (90)
+zatur     3  x       20 x     100 je 14  (86)
+ladov     1  x       15 x      75 je 10   (65)   
+         
+          11         95 je 96?  450 je 134  treba prideliť 396
+
+martin 1  0L-01    5 regalov x tj 25 polic  
+          0L-02    5 reg     x   25 políc  
+          0R-03    15 reg    x   75 políc
+          0R-04    10 reg    x   50 políc
+
+Sever     MS-0L-02 10reg   x     50 políc
+          MS-0P-01 10 reg  x     50 políc
+          MS-0L-03 5 reg   x     25 políc
+  
+Ladov    ML-1R-122 15 reg  x     75 políc
+
+zatur    MZ-0L-12  10 reg  x     50 políc
+         MZ-0L-13   5 reg x      25 políc
+         MZ-0R-14   5 reg x      25 políc

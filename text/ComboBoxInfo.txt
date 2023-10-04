@@ -1,0 +1,66 @@
+JComboBox je súčasťou balíka Java Swing. JComboBox zdedí triedu JComponent . JComboBox zobrazí vyskakovacie menu, ktoré zobrazuje zoznam a používateľ si môže vybrať možnosť z tohto zadaného zoznamu . JComboBox je možné upravovať alebo čítať iba na čítanie v závislosti od voľby programátora.
+Konštruktérmi JComboBoxu sú: 
+ 
+
+JComboBox() : vytvorí nový prázdny JComboBox .
+JComboBox (ComboBoxModel M) : vytvorí nový JComboBox s položkami zo zadaného ComboBoxModel
+JComboBox(E [ ] i) : vytvorí nový JComboBox s položkami zo zadaného poľa.
+JComboBox (vektorové položky) : vytvorí nový JComboBox s položkami zo zadaného vektora
+Bežne používané metódy sú: 
+ 
+
+addItem(E item) : pridá položku do JComboBoxu
+addItemListener( ItemListener l) : pridá ItemListener do JComboBoxu
+getItemAt(int i) : vráti položku v indexe i
+getItemCount(): vráti počet položiek zo zoznamu
+getSelectedItem() : vráti vybratú položku
+removeItemAt(int i): odstráni prvok v indexe i
+setEditable(boolovské b) : boolovské b určuje, či je rozbaľovacie pole editovateľné alebo nie. Ak je pravda odovzdaná, potom je rozbaľovacie pole editovateľné alebo naopak.
+setSelectedIndex(int i): vyberie prvok JComboBox pri indexe i.
+showPopup() :spôsobí, že rozbaľovacie pole zobrazí svoje vyskakovacie okno.
+setUI(ComboBoxUI ui): nastaví objekt L&F, ktorý vykreslí tento komponent.
+setSelectedItem(Object a): nastaví vybratú položku v oblasti zobrazenia rozbaľovacieho poľa na objekt v argumente.
+setSelectedIndex(int a): vyberie položku na indexe anIndex.
+setPopupVisible(booleovská verzia v): nastaví viditeľnosť kontextového okna.
+setModel(ComboBoxModel a) : nastaví dátový model, ktorý JComboBox používa na získanie zoznamu položiek.
+setMaximumRowCount(int count): nastaví maximálny počet riadkov, ktoré JComboBox zobrazí.
+setEnabled(booleovská b): povolí rozbaľovacie pole na výber položiek.
+removeItem(Object anObject) : odstráni položku zo zoznamu položiek.
+removeAllItems(): odstráni všetky položky zo zoznamu položiek.
+removeActionListener(ActionListener l): odstráni ActionListener.
+isPopupVisible() : určuje viditeľnosť kontextového okna.
+addPopupMenuListener(PopupMenuListener l): pridá poslucháča PopupMenu, ktorý bude počúvať notifikačné správy z kontextovej časti rozbaľovacieho poľa.
+getActionCommand() : vráti príkaz akcie, ktorý je súčasťou udalosti odoslanej poslucháčom akcie.
+getEditor(): vráti editor použitý na maľovanie a úpravu vybratej položky v poli JComboBox.
+getItemCount() : vráti počet položiek v zozname.
+getItemListeners(): vráti pole všetkých ItemListeners pridaných do tohto JComboBoxu s addItemListener().
+createDefaultKeySelectionManager() : vráti inštanciu predvoleného správcu výberu kľúča.
+fireItemStateChanged(ItemEvent e) : upozorní všetkých poslucháčov, ktorí prejavili záujem, na upozornenie na tento typ udalosti.
+firePopupMenuCanceled() : upozorní PopupMenuListeners, že kontextová časť rozbaľovacieho poľa bola zrušená.
+firePopupMenuWillBecomeInvisible() : upozorní PopupMenuListeners, že kontextová časť rozbaľovacieho poľa sa stala neviditeľnou.
+firePopupMenuWillBecomeVisible() : upozorní PopupMenuListeners, že kontextová časť rozbaľovacieho poľa bude viditeľná.
+setEditor(ComboBoxEditor a): nastaví editor používaný na maľovanie a úpravu vybratej položky v poli JComboBox.
+setActionCommand(Reťazec a) : nastaví akčný príkaz, ktorý by mal byť zahrnutý do udalosti odoslanej actionListeners.
+getUI() : vráti vzhľadový a dojmový objekt, ktorý vykresľuje túto súčasť.
+paramString() : vráti reťazcovú reprezentáciu tohto JComboBoxu.
+getUIClassID() : vráti názov triedy vzhľadu a správania, ktorá vykresľuje túto súčasť.
+getAccessibleContext() : získa AccessibleContext priradený k tomuto JComboBoxu
+
+
+
+///////////////////////////////  info k JTAble
+Áno, môžeš nastaviť tabuľku (`JTable`) na editovateľný režim pomocou metódy `setEditable(true)`. Táto funkcia umožní používateľovi priamo upravovať údaje v tabuľke. Keď je táto možnosť povolená, zmeny, ktoré používateľ vykoná v tabuľke, nebudú automaticky aktualizovať údaje v databáze. 
+
+Ak chceš, aby sa zmeny v tabuľke odrážali aj v databáze, budeš potrebovať spracovať tieto zmeny samostatne. To znamená, že musíš naslúchať na udalosti, ktoré signalizujú zmenu v tabuľke a potom tieto zmeny uložiť do databázy. Na to môžeš použiť akúkoľvek funkciu alebo metódu, ktorú si vytvoril na spojenie s databázou a aktualizáciu údajov.
+
+Typicky budete musieť sledovať udalosti ako napríklad:
+
+1. **Udalosť potvrdenia zmeny (`TableModelEvent`):** Táto udalosť sa vyvolá, keď používateľ potvrdí zmenu údaju v bunke. Táto udalosť ti poskytne informácie o riadku a stĺpci, kde došlo k zmene.
+
+2. **Udalosť stratenia zamerania (`FocusEvent`):** Táto udalosť sa vyvolá, keď sa bunka stratí zameranie, čo môže byť signálom na to, že používateľ dokončil úpravu danej bunky.
+
+3. **Udalosť stlačenia klávesu (`KeyEvent`):** Táto udalosť sa vyvolá, keď používateľ stlačí klávesu v bunke, napríklad Enter na potvrdenie zmien.
+
+4. **Iné udalosti závislé od konkrétnej situácie.**
+
+Po zachytení týchto udalostí budeš môcť získať aktualizované údaje z tabuľky a následne ich použiť na aktualizáciu údajov v databáze pomocou tvojej funkcie na komunikáciu s databázou.

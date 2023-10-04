@@ -1,0 +1,68 @@
+/*CREATE TABLE genders(gender CHAR(10)  NOT NULL UNIQUE,*/
+/*FOREIGN KEY (gender) REFERENCES persons(gender) MATCH SIMPLE );*/
+/*ALTER TABLE genders DROP FOREIGN KEY genders_ibfk_1;*/
+/*ALTER TABLE genders MODIFY COLUMN gender char(10) PRIMARY KEY NOT NULL;*/
+/*AlTER TABLE persons ADD  FOREIGN KEY (gender) REFERENCES genders(gender);*/
+/*UPDATE persons SET gender ="man" WHERE person_id=7 ;*/
+/* ALTER TABLE persons ADD COLUMN midle_name varchar(20) AFTER person_name; */
+/* UPDATE persons SET midle_name = "Augustín" where person_id = 1; */
+/* CREATE TABLE membership_cards
+                              ( card char(8)  PRIMARY KEY,
+                               name_membrer varchar(12) NOT NULL,
+                               release_date DATETIME  ,                               
+							   validity_to DATETIME    ); */
+  /* RENAME COLUMN identity_card to   membership_number;   */   
+ /* ALTER TABLE persons ADD FOREIGN KEY  (membership_number)    REFERENCES membership_cards(card) ; */
+ /*UPDATE persons SET membership_number = "00000002" WHERE person_id = 6; */
+
+/* CREATE VIEW member_cards_issued AS SELECT membership_number,person_name,midle_name,person_lastName FROM persons ; */
+
+SELECT * FROM member_cards_issued;
+
+
+/* UPDATE borrowed_books SET person_id = 6 where borrowed_id = 104 ; */
+/*  ALTER TABLE borrowed_books DROP COLUMN borrowed_id;
+ALTER TABLE borrowed_books MODIFY COLUMN day_of_borrowed DATETIME FIRST;
+ALTER TABLE borrowed_books ADD COLUMN return_date DATETIME DEFAULT NULL ;  */
+/* ALTER TABLE borrowed_books ADD COLUMN membership_cards char(8) AFTER person_id; */
+/* ALTER TABLE borrowed_books ADD FOREIGN KEY (membership_cards) REFERENCES membership_cards(card); */
+/* ALTER TABLE borrowed_books RENAME COLUMN amout to book_amout; */
+
+
+
+SELECT * FROM kniznica.borrowed_books;
+                               
+
+/* ALTER TABLE binging ADD COLUMN soft_binding ENUM("soft"); */
+/* ALTER TABLE binging MODIFY COLUMN hard_binding ENUM("hard") ; */
+/*ALTER TABLE binging DROP COLUMN hard_binding ;*/
+/* ALTER TABLE binding MODIFY COLUMN binding ENUM("hard,soft") PRIMARY KEY ; */
+
+/*INSERT INTO binding (binding) value("hard,soft");*/
+
+
+ UPDATE books SET book_binding = "hard" where book_id =6; 
+/*ALTER TABLE books ADD FOREIGN KEY (book_binding) REFERENCES binding(binding);  pomohlo vymazanie všetkých hodnôt v stplci book:binding na null*/
+/* UPDATE books SET book_binding = "soft" where book_id = 8; */
+/*UPDATE books SET book_binding = NULL where book_id >0;*/
+SELECT * FROM kniznica.books;
+
+/*ALTER TABLE books RENAME COLUMN book_stock to book_amout; */
+/* ALTER TABLE books MODIFY COLUMN book_amout DECIMAL(5,2) ;*/
+/*UPDATE books SET book_amout =9.50 WHERE book_id =1;*/
+/*ALTER TABLE books RENAME COLUMN book_genere to  book_genre ;*/
+/*ALTER TABLE books ADD COLUMN shelf char (10) NOT NULL AFTER book_genre ;*/
+/* CREATE TABLE shelf  (shelf char(10) PRIMARY KEY) ; */
+/* ALTER TABLE shelf RENAME COLUMN shelf to shelf_id; */
+/*ALTER TABLE books ADD FOREIGN KEY (shelf) REFERENCES shelf(shelf_id);*/
+/* ALTER TABLE shelf ADD  COLUMN shelf_lenght char(10); */
+/* ALTER TABLE shelf ADD  COLUMN unit varchar(2) DEFAULT "cm";*/
+/* RENAME TABLE shelf to shelf_row; */
+/* ALTER TABLE shelf_row RENAME COLUMN shelf_id  to shelf_row_id; -/
+/*CREATE TABLE shelf (shelf_id int PRIMARY KEY ,shelf_rows char(10) NOT NULL,shelf_widht char(10) , shelf_height char(10) ); */
+/* ALTER TABLE shelf ADD FOREIGN KEY (shelf_rows) REFERENCES shelf_row(shelf_row_id); */
+SELECT * FROM shelf;
+SELECT * FROM kniznica.binding;
+                               
+                               
+

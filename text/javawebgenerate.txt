@@ -1,0 +1,19 @@
+Java generate a website
+
+// HTML stands for "Hyper Text Markup Language"
+// use for creating web pages
+
+// 1. ask user for a file name
+// 2. chcek if file exists
+// 3. determine if file is empty
+// 4. reneme .txt as html
+5. read each line and isert  necessary  <tags>
+
+// HTML je skratka pre "Hyper Text Markup Language"
+// použite na vytváranie webových stránok
+
+// 1. požiadajte používateľa o názov súboru
+// 2. chcek ak súbor existuje
+// 3. určiť, či je súbor prázdny
+// 4. premeniť .txt ako html
+5. prečítajte si každý riadok a vložte potrebné <značky>

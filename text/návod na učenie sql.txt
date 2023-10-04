@@ -1,0 +1,13 @@
+SQL jazyk: SQL (Structured Query Language) je jazyk používaný na manipuláciu s dátami v databázach. Je dôležité naučiť sa základné príkazy ako SELECT, INSERT, UPDATE, DELETE a získanie skúseností s ich používaním.
+
+Databázový návrh: Zameraj sa na návrh databázy a normalizáciu, aby si pochopil, ako správne navrhnúť štruktúru tabuliek a vzťahy medzi nimi.
+
+Indexy a výkonnosť: Skúmaj, ako používať indexy na zlepšenie výkonu dotazov na databáze a optimalizovať ich výkonnosť.
+
+Transakcie: Porozmýšľaj o transakciách a ich správnom používaní na zabezpečenie konzistentnosti dát.
+
+Modelovanie dát: Preskúmaj rôzne typy dát a ich reprezentáciu v databázach, ako sú číselné hodnoty, reťazce, dátumy, a mnoho ďalších.
+
+Práca s rôznymi typmi databázových systémov: Existuje viacero typov databázových systémov, ako napríklad relačné databázy (napr. MySQL, PostgreSQL) a NoSQL databázy (napr. MongoDB). Nauč sa o nich viac a zistíš, ktorý typ je najvhodnejší pre konkrétny prípad použitia.
+
+Praktické projekty: Najlepší spôsob, ako sa učiť, je vytvárať projekty a prakticky ich realizovať. Skús vytvoriť vlastné databázové aplikácie a riešiť reálne problémy.
