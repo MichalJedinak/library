@@ -1,0 +1,50 @@
+import org.json.simple.JSONObject;
+- Formát reprezentácie údajov
+-bežne používané pre Api a konfiguráciu
+- ľahké až ľahké čítanie/písanie
+JSON JAVASCRIPT OBJECT NOTATION je jednoducho formát reprezentácie údajov podobný xml alebo yaml, ktorý je široko rozšírený na internete pre takmer každé jedno API
+ku ktorým budete mať prístup, ako aj pre konfiguračné súbory a veci, ako je hra
+a textové editory ako vs kód a mnoho ďalších miest počas programovania
+používa sa, pretože je extrémne ľahký na posielanie tam a späť
+vzhľadom na malú veľkosť súboru je ľahko čitateľný
+v porovnaní s niečím, ako je XML, pretože je oveľa čistejšie a nie je tu toľko otváracích a zatváracích značiek, ktorých sa treba báť
+o a tiež sa veľmi dobre integroval s Javasriptom, pretože JSON je len super sada Javascriptu, čo znamená, že všetko, čo napíšete do JSON, je platný JAvasrcipt, takže sa pekne integroval s Javascriptom, ktorý sa používa všade pre zadnú a frontendovú aplikáciu
+levitácia tiež takmer jediné hlavné jazyky
+má nejakú formu knižnice alebo vstavanú funkciu na analýzu reťazcov JSON do objektov alebo tried v jazykoch, čo umožňuje prácu s údajmi JSON
+extrémne jednoduché v rámci programovacieho jazyka počas celého vášho programovania
+kariéra, do ktorej sa neustále chystáte ako JSON, či už ide o vytváranie Api
+používanie rozhrania API alebo vytváranie konfiguračných súborov, ktoré môžete použiť vy alebo iní ľudia na používanie vašej aplikácie, teraz už chápeme, čo je JSON
+a prečo je dôležité, poďme sa ponoriť do syntaxe JSOn tým, že začneme hovoriť o typoch, ktoré môže JSON reprezentovať, ako vieme, ak je JSOn formát reprezentácie údajov, takže musíme byť albe, aby sme reprezentovali určitý typ údajov
+
+TYPY JSON ___________________
+Reťazec "Ahoj" "Kayle" "L"
+Čísla napr. 10 1,5 -30 1,2e10
+Booleovská pravda nepravda
+null null
+
+v ňom a JSOn natívne podporujú String Numbere a tieto čísla môžu byť v akomkoľvek formáte, či už ide o desatinné čísla celé čísla
+záporné čísla párne vedecké čísla zápis čísel
+jeho podpora boolovské hodnoty, ktoré môžu byť pravdivé alebo nepravdivé
+ist podporuje null, čo v podstate neznamená nič a raise that can môže zoznamom ktoréhokoľvek z typov, o ktorých sme hovorili, plus typ siete, ktorý je konečným typom objektu, objekt je najkomplexnejší, ale najpoužívanejší typ whitin json a umožňuje vám reprezentovať hodnoty, ktoré páruje kľúčová hodnota, takže jej dáte akey a potom hodnotu a táto hodnota môže byť akýmkoľvek iným typom, o ktorom sme hovorili, takže číslo reťazca boolean.. žiadny z týchto rôznych typov nemôže byť hodnotou kľúča, takže poďme sa ponoriť do príkladu použitia json vo vnútri súboru
+prvá vec, ktorú musíte urobiť, je vytvoriť súbor s bodkou Json
+rozšírenie na jeho konci, to je bodka JSON na konci vášho súboru a tým sa vytvorí súbor JSON
+vnútri súboru JSON, čo robíte, je, že si vezmete jeden z typov, o ktorých sme hovorili, a
+vložíte to do súboru, takže napríklad môžete vložiť reťazec, môžete vložiť číslo ... chcete vnútri súboru a to je platný json, ale ak máte jediné alebo jediné číslo, naozaj nie je veľmi užitočné mať celý
+súbor pre jeden vstup, takže väčšinu času, keď pracujete s jsom, budete mať buď pole alebo objekt ako vašu najvyššiu úroveň súboru a potom v tomto poli alebo objekte budete mať iné hodnoty, takže mnohí ho dokonca majú iné objekty majú iné polia, dokonca len jednotlivé hodnoty, ako napríklad reťazec alebo čísla vo vnútri, takže si vezmime príklad používateľského objektu, ktorý chceme umiestniť na najvyššiu úroveň nášho súboru json, ktorý bude volať používateľa json, aby vytvoril objekt, ktorý potrebujeme ak chcete použiť otváranie a zatváranie zložených zátvoriek a potom do nich vložíme všetky páry kľúč-hodnota, ktoré tvoria náš objekt, a každý jeden z týchto párov kľúč-hodnota musí byť kľúč obklopený dvojitými hodnotami, za ktorými nasleduje dvojbodka a potom hodnota pre tento kľúč a že ak máme viacero párov kľúč-hodnota, potrebujeme čiarky oddeľujúce každý jeden z našich párov kľúč-hodnota podobne, ako by sme vytvorili pole v ....
+{ "kľúč" "hodnota" ,
+    "kľúč" "hodnota"
+}
+
+normálny programovací jazyk, takže napríklad náš používateľ má tento kľúč mena obklopiť v dvojitých položkách, dať zaň bodkočiarku a potom by sme hodnotu nášho mena vložili do dvojitých názvov, pretože je to reťazec a musí byť v dvojitých položkách a potom na na koniec dáme čiarku, pretože máme pre používateľa iné páry kľúčových hodnôt, napríklad ak by sme chceli použiť obľúbené číslo ako ďalšiu vlastnosť, my---
+{ "meno" : "Kayle" ,
+    "favotiteNumber" : 3,
+} --- vloží obľúbené číslo do dvojitej ponuky, za ktorou nasleduje bodkočiarka, čím sa zaradí obľúbené číslo používateľov
+ak by sme potom chceli použiť bolean, použijeme čiarku
+{ "meno" : "Kayle" ,
+    "favotiteNumber" : 3,
+   "je programátor" :pravda,
+   "hobies" : [ " vzpieranie " , " jednie koláčou "] ,
+}
+a ďalšia vlastnosť, ktorú by sme použili, je, že programátor vloží dvojbodku a potom vložíme buď true, alebo false bez akýchkoľvek poznámok, aby to znamenalo, že toto je bolean a nie reťazec, takže by sme dali true otr false v závislosti od toho, či daný používateľ bol programátor alebo nie
+
+5 minút 14 sekúnd

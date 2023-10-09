@@ -1,3 +1,20 @@
+<?<xml>
+      <project>
+            <modelVersion></modelVersion>
+            <groupId></groupId>
+            <artefactId></artefactId>
+            <version></version>
+
+            <dependencies>
+                  <dependency>
+                        <groupId></groupId>
+                        <artefactId></artefactId>
+                        <version></version>
+                  </dependency>
+            </dependencies>
+      </project>
+</xml>
+
 <servlet>
     <servlet-name>KniznicaDtb</servlet-name>
     <servlet-class>com.example.KniznicaDtb</servlet-class>

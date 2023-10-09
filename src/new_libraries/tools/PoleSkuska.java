@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
@@ -19,10 +20,8 @@ public class PoleSkuska  extends JFrame {
 String jedna; String dva;
       PoleSkuska(){
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setVisible(true);
-            this.setSize(800, 500);
             this.setTitle("MigLayout pole skuska");
-            
+            this.setSize(800, 500);            
             JPanel panel = new JPanel();
             panel.setLayout(new MigLayout());
             panel.add(new Button("Button_1"));
@@ -35,6 +34,10 @@ String jedna; String dva;
             panel.add(new Button("Button_8"));
             panel.add(new Button("Button_9"));
             this.add(panel,BorderLayout.CENTER);
+            panel.add(new JLabel(""));
+            this.setVisible(true);
+            this.repaint();
+            
             for(int p = 0; p <index ;p++){                 
                   jedna =" "+ String.valueOf(row);
                   dva = " "+ String.valueOf(columns);

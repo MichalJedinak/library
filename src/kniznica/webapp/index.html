@@ -19,8 +19,8 @@ Body {
 header{
     padding: .3em;
     -webkit-position:sticky;
-    position: sticky;
     position: -webkit-sticky;
+    position: sticky;
     width: 100%;
     top: 0;
     text-align: center;
@@ -133,6 +133,20 @@ button {
             <p><strong>Forgot</strong>  <a href="#"> password? </a> </p>
         </div> 
     </form>  
+<script>
+    class user{
+        constructor(meno,vek){
+            this.meno = meno;
+            this.vek =vek;
+        }
+    }
+    const michal = new user("michal",27);
+    console.log(michal);
+    document.write(`${michal,meno},${michal,vek}`);
+    const Michal = new user("Michal",47);
+    console.log(Michal);
+
+</script>
 </main>
 </body>   
 </html>

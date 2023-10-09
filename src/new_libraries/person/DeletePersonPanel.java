@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 //import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -152,11 +153,11 @@ public class DeletePersonPanel extends JPanel implements ActionListener {
                   String deletePersonFromDatabase = " DELETE FROM persons WHERE id ="+selectedId;
                   Connection connection = DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username,SqlFunctions.password);
                   java.sql.Statement statement = connection.createStatement();
-                  // String updateMemberShipCard = "UPDTAE membership_cards SET member_name =?,release_date =?,validity_to=? WHERE id ="+selectedId+";";
-                  // PreparedStatement prst = connection.prepareStatement(updateMemberShipCard);
-                  // prst.setNull(1,java.sql.Types.VARCHAR);
-                  // prst.setNull(2,java.sql.Types.DATE);
-                  // prst.setNull(3,java.sql.Types.DATE);
+                  String updateMemberShipCard = "UPDTAE membership_cards SET member_name =?,release_date =?,validity_to=? WHERE id ="+selectedId+";";
+                  PreparedStatement prst = connection.prepareStatement(updateMemberShipCard);
+                  prst.setNull(1,java.sql.Types.VARCHAR);
+                  prst.setNull(2,java.sql.Types.DATE);
+                  prst.setNull(3,java.sql.Types.DATE);
 
                   statement.executeUpdate(deletePersonFromDatabase);
                   JOptionPane.showConfirmDialog(null,"Osoba bola odstranená s SQL databazy","soba bola vymazaná !!",JOptionPane.PLAIN_MESSAGE);
