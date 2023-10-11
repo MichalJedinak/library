@@ -111,6 +111,9 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   booksFromDatabase();
                   right.remove(dropPanel);
                   right.add(addPanel,"wrap");
+                  DefaultListModel<String> empryModel= new DefaultListModel<>();
+                  empryModel.addElement("");
+                  dropList.setModel(empryModel);       
                   this.repaint();this.revalidate();
             }
             if(e.getSource()==vratenie){
@@ -122,22 +125,12 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   showAllBorrowedBooksOfaPerson();
                   this.repaint();this.revalidate();
             }
-            if(e.getSource()==addButton){
-            int row = table_1.getSelectedRow();
-            String column = table_1.getModel().getValueAt(row,0).toString();
-            int book_id = Integer.parseInt(column);
-            String comboBoxItems = comboBox.getSelectedItem().toString();
-            String[ ]splitItems = comboBoxItems.split(" "); 
-            String item_0 = splitItems[0];
-            String item_4 = splitItems[4];
-            int person_id = Integer.parseInt(item_0);
-            int membership_card = Integer.parseInt(item_4);
-            System.out.println(membership_card+" "+person_id+" "+book_id);
+            if(e.getSource()==addButton){      
             pridajNovuVypozicanuKnihu();
             selectPersonFromDatabase();     
             showAllBorrowedBooksOfaPerson();
             booksFromDatabase();  
-            field_1.setText("");         
+            field_1.setText("");  
             this.repaint();  this.revalidate();   
             }
 
