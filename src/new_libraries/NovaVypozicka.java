@@ -11,9 +11,9 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Vector;
 
 public class NovaVypozicka extends JFrame implements ActionListener{
 
@@ -22,13 +22,13 @@ public class NovaVypozicka extends JFrame implements ActionListener{
       JLabel leftInfo = new JLabel("Vyber čitateľa s zoznamu !");
       JLabel tableTitle = new JLabel("Zoznam vypožičaných kníh");
       static JComboBox<String> comboBox;
-      JTable table = new JTable(); // tabulka pre zoznam kníh z knižnice
+      JTable table = new JTable(); // tabulka pre zoznam požičaných kníh podla osoby z knižnice
       JScrollPane pane = new JScrollPane(table);
       JPanel right = new JPanel();
       JPanel addPanel =new  JPanel();
       JLabel label_1 = new JLabel("Kniha");// pre názov vybratej knihy
       JTextField field_1 = new JTextField(90);// pre zapísanie vybratej knihy
-      JTable table_1 = new JTable();
+      JTable table_1 = new JTable();//  tabulka pre knihy čo sa dajú požičať
       JScrollPane pane_1 = new JScrollPane();
       JButton addButton = new JButton("add");
       
@@ -64,6 +64,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
            vypozicaj.addActionListener(this);
             vratenie.addActionListener(this);
             pane_1.setPreferredSize(new Dimension(300, 150));
+            pane_1.setViewportView(table_1);
             pane_1.setLayout(new ScrollPaneLayout());
             addPanel.setPreferredSize(new Dimension(300, 200));
             addPanel.setLayout(new MigLayout());
@@ -71,6 +72,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             addPanel.add(field_1,"wrap");
             addPanel.add(pane_1,"span 3,wrap");
             addPanel.add(addButton,"wrap");
+            addButton.addActionListener(this);
 
             dropPane.setPreferredSize(new Dimension(300, 150));
             dropPane.add(dropList);dropPane.setViewportView(dropList);
@@ -106,6 +108,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent e) {
             if(e.getSource()==vypozicaj){
+                  booksFromDatabase();
                   right.remove(dropPanel);
                   right.add(addPanel,"wrap");
                   this.repaint();this.revalidate();
@@ -119,7 +122,104 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   showAllBorrowedBooksOfaPerson();
                   this.repaint();this.revalidate();
             }
+            if(e.getSource()==addButton){
+            int row = table_1.getSelectedRow();
+            String column = table_1.getModel().getValueAt(row,0).toString();
+            int book_id = Integer.parseInt(column);
+            String comboBoxItems = comboBox.getSelectedItem().toString();
+            String[ ]splitItems = comboBoxItems.split(" "); 
+            String item_0 = splitItems[0];
+            String item_4 = splitItems[4];
+            int person_id = Integer.parseInt(item_0);
+            int membership_card = Integer.parseInt(item_4);
+            System.out.println(membership_card+" "+person_id+" "+book_id);
+            pridajNovuVypozicanuKnihu();
+            selectPersonFromDatabase();     
+            showAllBorrowedBooksOfaPerson();
+            booksFromDatabase();  
+            field_1.setText("");         
+            this.repaint();  this.revalidate();   
+            }
+
+
+            table.addMouseListener(new MouseAdapter() {
+                                    
+                  @Override
+                  public void mouseClicked(MouseEvent e) {
+                        int listItems = table.getSelectedRow();
+                        for(int i = 0;i<table.getRowCount();i++){
+                              DefaultListModel<String> model = new DefaultListModel<String>();
+                              model.addElement(table.getModel().getValueAt(listItems,1).toString()+"\n");
+                              dropList.setModel(model);                              
+                        }
+
+                        // int listItems = table.getSelectedRow();
+                        // DefaultListModel<String> model = (DefaultListModel<String>) dropList.getModel(); // Získajte existujúci model JList
+                        // model.addElement(table.getModel().getValueAt(listItems, 1).toString() + "\n");
+
+                        // int listItems = table.getSelectedRow();
+                        // DefaultListModel<String> model = new DefaultListModel<>(); // Vytvorte nový model
+                        // model.addElement(table.getModel().getValueAt(listItems, 1).toString() + "\n");
+
+                        // // Pridajte nový model k existujúcemu JList (ak neexistuje, tak ho vytvorte)
+                        // if (dropList.getModel() == null) {
+                        // dropList.setModel(model);
+                        // } else {
+                        // for (int i = 0; i < model.getSize(); i++) {
+                        //       ((DefaultListModel<String>) dropList.getModel()).addElement(model.get(i));
+                        // }
+                        // }
+
+                        // int listItems = table.getSelectedRow();
+                        // String selectedValue = (table.getModel().getValueAt(listItems, 1).toString()+"\n" );
+                        // ListModel<String> currentModel = dropList.getModel();
+                        // DefaultListModel<String> newModel = new DefaultListModel<>();
+                        // newModel.addElement(table.getModel().getValueAt(listItems, 1).toString()+"\n" );
+                        // if (!newModel.contains(selectedValue)) {
+                        //       newModel.addElement(selectedValue);
+                        //       dropList.setModel(newModel);
+                        //   }
+                        // Pridajte položky z existujúceho modelu do nového modelu (ak existuje)
+                        // for (int i = 0; i < currentModel.getSize(); i++) {
+                        // newModel.addElement(currentModel.getElementAt(i));
+                        // }
+                        //dropList.setModel(newModel); // Nastavte nový model do JList
+
+
+
+                        this.repaint();                                  
+                         System.out.println(listItems);
+                     }
+   
+                     private void repaint() {
+               }
+
+                     @Override
+                     public void mousePressed(MouseEvent e) {
+                     }
+   
+                     @Override
+                     public void mouseReleased(MouseEvent e) {
+                     }
+   
+                     @Override
+                     public void mouseEntered(MouseEvent e) {
+                     }
+   
+                     @Override
+                     public void mouseExited(MouseEvent e) {
+                     }
+               });
+
+               table_1.addMouseListener(new MouseAdapter() {
+                  @Override
+                  public void mouseClicked(MouseEvent e) {
+                        int tableRow = table_1.getSelectedRow();                          
+                        field_1.setText(table_1.getModel().getValueAt(tableRow,1).toString());
+                     }
+               });
       }
+      
 
       public static void selectPersonFromDatabase(){
             String query = " SELECT * FROM persons;";
@@ -195,13 +295,12 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             
       }
       public void booksFromDatabase(){
-            String query = "SELECT * FROM books";
+            String query = "select books.id,title,autor from books   left join borrowed_books on books.id = borrowed_books.book_id WHERE borrowed_books.book_id IS NULL;";
             Connection connection = null;
             try {
                   connection= DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);
                   Statement statement = connection.createStatement();
                   ResultSet resultSet = statement.executeQuery(query);
-                  DefaultTableModel emptyModel = new DefaultTableModel();
                   DefaultTableModel model = new DefaultTableModel();
                   java.sql.ResultSetMetaData rsmd = resultSet.getMetaData();
                   int columns = rsmd.getColumnCount();// zistíme počet stĺpcou
@@ -209,7 +308,6 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   for(int i = 0; i<columns;i++)
                   columnsName[i]=rsmd.getColumnName(i+1);// použijeme get column Name s resulset meta data
                   model.setColumnIdentifiers(columnsName);//  default modelu nastavíme identifikované stĺpce
-                  emptyModel.setColumnIdentifiers(columnsName);
                   while (resultSet.next()) {
                     int i =    resultSet.getInt(1);
                     String selectId = String.valueOf(i);
@@ -218,10 +316,49 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                     String[]  data ={selectId,title,autor};                      
              
                   model.addRow(data);
-                  table.setModel(model);
+                  table_1.setModel(model);
                   
                   }
                   connection.close();     
+            } catch (Exception e) {
+                  JOptionPane.showMessageDialog(null, e, "SQL EROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+      }
+      public void pridajNovuVypozicanuKnihu(){
+            String query="INSERT INTO borrowed_books(day_of_borrowed,book_id,person_id,membership_cards,amout,return_date) VALUE(NOW(),?,?,?,?,DATE_ADD(NOW(), INTERVAL 2 MONTH) )";
+            int row = table_1.getSelectedRow();
+            String column = table_1.getModel().getValueAt(row,0).toString();
+            int book_id = Integer.parseInt(column);
+            String comboBoxItems = comboBox.getSelectedItem().toString();
+            String[ ]splitItems = comboBoxItems.split(" "); 
+            String item_0 = splitItems[0];
+            String item_4 = splitItems[4];
+            int person_id = Integer.parseInt(item_0);
+            int membership_card = Integer.parseInt(item_4);
+            System.out.println(membership_card+" "+person_id+" "+book_id);
+
+            String cenaQuery = "SELECT amout FROM books WHERE books.id ="+book_id+";";
+            try {
+                  Connection connection = DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);             
+                  Statement statement = connection.createStatement();
+                  ResultSet resultSet = statement.executeQuery(cenaQuery);
+                  if (resultSet.next()) {
+                        resultSet.getDouble("amout");
+                        System.out.println();
+                        System.out.println(resultSet.getDouble("amout")+"všetko je dnes ok všetko je over right");
+                  }
+                  Double cena = resultSet.getDouble("amout");
+                  PreparedStatement preparedStatement = connection.prepareStatement(query);
+                  preparedStatement.setInt(1, book_id);
+                  preparedStatement.setInt(2,person_id);
+                  preparedStatement.setInt(3, membership_card);
+                  preparedStatement.setDouble(4, cena);
+                  preparedStatement.executeUpdate();
+                 JOptionPane.showMessageDialog(null, "asi sa to podarilo", "SQL EROR",JOptionPane.INFORMATION_MESSAGE);
+                 resultSet.close();
+                 statement.close();
+                 connection.close();
             } catch (Exception e) {
                   JOptionPane.showMessageDialog(null, e, "SQL EROR",JOptionPane.INFORMATION_MESSAGE);
 

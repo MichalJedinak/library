@@ -28,8 +28,7 @@ public class JavaTable  extends JFrame{
                   @Override
                   public void actionPerformed(ActionEvent e) {
                         ukazUdajeZsqlDatabzyDoJTable();
-                        System.out.println("fungujem");                     
-                     
+                        System.out.println("fungujem");                    
                      table.addMouseListener(new MouseAdapter() {
                                     
                            @Override
