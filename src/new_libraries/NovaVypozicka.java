@@ -70,6 +70,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             addPanel.setLayout(new MigLayout());
             addPanel.add(label_1);
             addPanel.add(field_1,"wrap");
+            field_1.addActionListener(this);
             addPanel.add(pane_1,"span 3,wrap");
             addPanel.add(addButton,"wrap");
             addButton.addActionListener(this);
@@ -120,6 +121,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             if(e.getSource()==vratenie){
                   right.remove(addPanel);
                   right.add(dropPanel,"wrap");
+                  field_1.setText("");
                   this.repaint();this.revalidate();
             }
             if(e.getSource()==comboBox){
@@ -134,7 +136,6 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             field_1.setText("");  
             this.repaint();  this.revalidate();   
             }
-
 
             table.addMouseListener(new MouseAdapter() {
                                     
@@ -210,6 +211,12 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   public void mouseClicked(MouseEvent e) {
                         int tableRow = table_1.getSelectedRow();                          
                         field_1.setText(table_1.getModel().getValueAt(tableRow,1).toString());
+                     }
+               });
+               field_1.addMouseListener(new MouseAdapter() {
+                  @Override
+                  public void mouseClicked(MouseEvent e) {                                                
+                        field_1.setText("");
                      }
                });
       }

@@ -16,20 +16,23 @@ public class WebscraperAllBooks {
       static String POEZIA = "POEZIA";
       static String ROMÁN = "ROMÁN";
       static String ROZPRAVKA = "ROZPRÁVKA";
+      static String VZDELANIE = "VZDELANIE";
       static String author;
       public static int serchResult;
 
     public static void main(String[] args) {
-        List<Book> allBooks = databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21");
-                  //  databaseAllBooks("https://www.databazeknih.cz/knihy")  // All books 
-                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/sci-fi-19")  // SCIFI žáner
-                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/romany-12")  // ROMÁN žáner
-                        //  databaseAllBooks("https://www.databazeknih.cz/zanry//poezie-23")  // POEZIA žáner
-                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/horory-6")  // HOROR žáner
-                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21")  // FANTASY žáner
+        List<Book>
+            // allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/romany-12");  // ROMÁN žáner
+             //allBooks = databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21");
+                  //  databaseAllBooks("https://www.databazeknih.cz/knihy") ; // All books 
+                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/sci-fi-19");  // SCIFI žáner
+                   // allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry//poezie-23");  // POEZIA žáner
+                 // allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/horory-6");  // HOROR žáner
+                  //  databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21") ; // FANTASY žáner
                 //  WebscraperAllBooks.databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21");   
-                   
-            
+                 //  allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/pohadky-77");//rozpravky 
+                    allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/encyklopedie-74");//enciklopedis
+
     }
 
 //     WebscraperAllBooks(){
@@ -53,8 +56,8 @@ public class WebscraperAllBooks {
         }
         for (Book book : allBooks) {
             serchResult=allBooks.size()  ;
-            System.out.println(book.getAuthor() + " " + book.getTitle() + " " + FANTAZIA);
-            System.out.println( serchResult);
+            System.out.println( book.getAuthor()+"  " +book.getTitle()+ "  " + VZDELANIE);
+           // System.out.println( serchResult);
         }
         return allBooks;
     }
