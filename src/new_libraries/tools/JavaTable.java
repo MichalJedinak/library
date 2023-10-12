@@ -131,11 +131,34 @@ public class JavaTable  extends JFrame{
                         defaultModel.addRow(dataLists);// pridanie row do default modelu
                         
                   }
+
+                  // int maxWidth = 0;
+                  // int rowIndex = table.getSelectedRow();
+                  // Object value = defaultModel.getValueAt(rowIndex, 0);
+                  // int cellWidth = getCellTextWidth(value.toString());
+                  // if(cellWidth>maxWidth){
+                        //       maxWidth=cellWidth;
+                  // }
                   table.setModel(defaultModel);// tabulke nastavíme model
-                  table.getColumnModel().getColumn(0).setPreferredWidth(6);
-                  table.getColumnModel().getColumn(1).setPreferredWidth(150);
-                  table.getColumnModel().getColumn(2).setPreferredWidth(50);
-                  table.getColumnModel().getColumn(3).setPreferredWidth(50);
+                  for (int columnIndex = 0; columnIndex < defaultModel.getColumnCount(); columnIndex++) {
+                        int maxWidth = 0;// reprezentuje max rozmer bunky v tabulke podla počtu char v bunke                         
+                        for (int rowIndex = 0; rowIndex < defaultModel.getRowCount(); rowIndex++) {
+                            Object value = defaultModel.getValueAt(rowIndex, columnIndex);// reprezentuje údaj v konkrétnej bunke ako objekt
+                            int cellWidth = getCellTextWidth(value.toString());// objekt 
+                            // Pokud je aktuální šířka buňky větší než dosud maximální, aktualizujte ji
+                            if (cellWidth > maxWidth) {
+                                maxWidth = cellWidth;
+                            }
+                        }
+                        
+                        // Nastavit preferovanou šířku sloupce na maximální šířku
+                        table.getColumnModel().getColumn(columnIndex).setPreferredWidth(maxWidth);
+                    }
+                   /////  ďalší spôsob  úpravy  šírky bunky v tabulke pre konkrétny stĺpec 
+                  // table.getColumnModel().getColumn(0).setPreferredWidth(6);
+                  // table.getColumnModel().getColumn(1).setPreferredWidth(140);
+                  // table.getColumnModel().getColumn(2).setPreferredWidth(50);
+                  // table.getColumnModel().getColumn(3).setPreferredWidth(50);
 
 
                  /*A uzavrieme spojenie a čo treba */
@@ -147,6 +170,10 @@ public class JavaTable  extends JFrame{
                   JOptionPane.showMessageDialog(null, e, "CHYBA", JOptionPane.ERROR_MESSAGE);;
             }
       }
+      ///  int na získanie čísla s dlžky textu v bunke tabulky s objektu  
+      private int getCellTextWidth(String text) {           
+            return text.length() * 10; // vráti šírku zanku v px
+        }
 
       public static void main(String[] args) {
             new JavaTable();
