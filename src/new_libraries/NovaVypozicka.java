@@ -29,7 +29,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
       JLabel label_1 = new JLabel("Kniha");// pre názov vybratej knihy
       JTextField field_1 = new JTextField(90);// pre zapísanie vybratej knihy
       JTable table_1 = new JTable();//  tabulka pre knihy čo sa dajú požičať
-      JScrollPane pane_1 = new JScrollPane();
+      JScrollPane pane_1 = new JScrollPane(table_1);
       JButton addButton = new JButton("add");
       
       JPanel dropPanel = new JPanel();
@@ -75,6 +75,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             addButton.addActionListener(this);
 
             dropPane.setPreferredSize(new Dimension(300, 150));
+            dropPane.setLayout(new ScrollPaneLayout());
             dropPane.add(dropList);dropPane.setViewportView(dropList);
             dropList.setVisibleRowCount(9);
             dropPanel.setPreferredSize(new Dimension(300, 200));
@@ -288,7 +289,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             
       }
       public void booksFromDatabase(){
-            String query = "select books.id,title,autor from books   left join borrowed_books on books.id = borrowed_books.book_id WHERE borrowed_books.book_id IS NULL;";
+            String query = "select books.id,title,autor from books   left join borrowed_books on books.id = borrowed_books.book_id WHERE  day_of_borrowed is null  or day_of_borrowed is not null and borrowed = false && returned_when is not null ;;";
             Connection connection = null;
             try {
                   connection= DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);
@@ -319,7 +320,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             }
       }
       public void pridajNovuVypozicanuKnihu(){
-            String query="INSERT INTO borrowed_books(day_of_borrowed,book_id,person_id,membership_cards,amout,return_date) VALUE(NOW(),?,?,?,?,DATE_ADD(NOW(), INTERVAL 2 MONTH) )";
+            String query="INSERT INTO borrowed_books(day_of_borrowed,book_id,borrowed,person_id,membership_cards,amout,return_date) VALUE(NOW(),?,true,?,?,?,DATE_ADD(NOW(), INTERVAL 2 MONTH) )";
             int row = table_1.getSelectedRow();
             String column = table_1.getModel().getValueAt(row,0).toString();
             int book_id = Integer.parseInt(column);
@@ -339,7 +340,6 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   if (resultSet.next()) {
                         resultSet.getDouble("amout");
                         System.out.println();
-                        System.out.println(resultSet.getDouble("amout")+"všetko je dnes ok všetko je over right");
                   }
                   Double cena = resultSet.getDouble("amout");
                   PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -348,7 +348,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   preparedStatement.setInt(3, membership_card);
                   preparedStatement.setDouble(4, cena);
                   preparedStatement.executeUpdate();
-                 JOptionPane.showMessageDialog(null, "asi sa to podarilo", "SQL EROR",JOptionPane.INFORMATION_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "Kniha s ID : "+book_id+" Bola pridaná osobe s ID : "+person_id, "RESULT SQL INFO",JOptionPane.INFORMATION_MESSAGE);
                  resultSet.close();
                  statement.close();
                  connection.close();
