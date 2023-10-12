@@ -90,11 +90,11 @@ public static ArrayList<String> x ;
             PreparedStatement newBookStatment = connection.prepareStatement(insertBookQuery);
             newBookStatment.setInt(1, nextItemId); //  item id z tabulky items                 
             newBookStatment.setInt(2,nextBookId); // nastaviť na nasledujúce id z tabulky books
-            newBookStatment.setString(3,Book.title); // nový titul
-            newBookStatment.setString(4, Book.author);  // nový autor
+            newBookStatment.setString(3,title); // nový titul
+            newBookStatment.setString(4, author);  // nový autor
             newBookStatment.setString(5, genre);   // novy žaner zhodný s tabulkou genres
             newBookStatment.setString(6,newShelfRoewId); // nastaviť na shelfRow id            
-            newBookStatment.setDouble(7,Book.amout);  // nová cena
+            newBookStatment.setDouble(7,amout);  // nová cena
             newBookStatment.setString(8,binding.name());// nový binding =  enum value
 
             newBookStatment.executeUpdate();
@@ -181,7 +181,7 @@ public static ArrayList<String> x ;
            // System.out.println(personId+" "+name+" "+lastName+" \n"+countId+" \n"+byteImg+" Contol Data!!! ");
             JOptionPane.showMessageDialog(null, personId+" "+name+" "+lastName+" "+countId+" Contol Data!!! ", "OZNÁMENIE O VLOŽENÍ ÚDAJOV .", JOptionPane.INFORMATION_MESSAGE);
             Statement membershipStatement =connection.createStatement();
-            membershipStatement.executeUpdate("UPDATE membership_cards SET member_name = (SELECT CONCAT(name,\" \", last_name) FROM persons WHERE  membership_number = membership_cards.id) , release_date = NOW() , validity_to = DATE_ADD(release_date, INTERVAL 2 YEAR) WHERE id = (SELECT membership_number FROM persons WHERE membership_number = membership_cards.id);");
+            membershipStatement.executeUpdate("UPDATE membership_cards SET member_name = (SELECT CONCAT(name,\" \", last_name) FROM persons WHERE  membership_number = membership_cards.id) , release_date = NOW() , validity_to = DATE_ADD(release_date, INTERVAL 2 YEAR) WHERE id ="+countId+";");
             System.out.println("Adding a new Person  is correct :)"); 
             memberCard.close(); 
             perosnsResultSet.close(); 

@@ -58,7 +58,7 @@ JPanel hlavny= new JPanel();
       JPanel colum_3 = new JPanel();//  pre comob_3 a ctyField
       JPanel colum_4 = new JPanel(); // pre combo_4 a postCode fieled
       //String [] comboData_2;
-      JComboBox<Object> combo_2 ; // pre členskú kartu
+      static JComboBox<Object> combo_2 ; // pre členskú kartu
       JComboBox<String> combo_3; // pre mestá
       JComboBox<String> combo_4;//  pre post code
       public static JTextField nameField = new JTextField(16);
@@ -633,24 +633,19 @@ JPanel hlavny= new JPanel();
                   String addStreet = streetField.getText();
                   String addCity = cityFiled.getText();
                   String addPostCode = postCode.getText();
-                  // Person p = new Person();
-                  // p.setPerson_name(addname);
-                  // p.setMidleName(addMidleName);
-                  // p.setPerson_lastName(addLastName);
-                  // p.setAdress(addStreet);
-                  //Gender gender=Gender.man;
-                 // gender = Gender.valueOf(genderFiedl.getText()); 
+                
                   String gender = genderFiedl.getText();           
                   readByteFromTxt(); //  prečítanie zapísaneho byte kodu imageTransferToBlop
                   String byteImg = byteLabel.getText();                 
                   byte[] bytes = byteImg.getBytes();;      //  skrytý label odkial sa číta byte kod do stringu pre zápis do sql          
-                 SqlFunctions.insertNewPersonToDatabaseTablePersons(addname,addMidleName,addLastName,gender,addStreet,addCity,addPostCode,bytes);
+                  SqlFunctions.insertNewPersonToDatabaseTablePersons(addname,addMidleName,addLastName,gender,addStreet,addCity,addPostCode,bytes);
+                  refreshComboBox();
+                  setCombo_2BoxData();
+                  this.repaint();this.revalidate();
                 // String str = addname+" "+addMidleName+" "+lastName+" "+gender;
                  String str = "Person name : "+addname+"\n Person midle name : "+addMidleName+"\n Person last name : "+ addLastName+"\n Person gender : "+gender+"\n Person Adress : "+ addStreet+" City : "+addCity+"  postCode : "+addPostCode+"\n Person img : "+byteImg;
-                 System.out.println("Person name : "+addname+"\n Person midle name : "+addMidleName+"\n Person last name : "+ addLastName+"\n Person gender : "+gender+"\n Person Adress : "+ addStreet+"; City : "+addCity+" ; postCode : "+addPostCode+"\n Person img : "+byteImg);
                  JOptionPane.showMessageDialog(null,str+":)","Osoba bola pridaná do databázy !", JOptionPane.INFORMATION_MESSAGE);
                  SqlFunctions.refreschDatabase();
-                 refreshComboBox();
                  UpdatePerson.refreshComboBoxData();
                  DeletePersonPanel.refreshDeleteComboBoxData();
                   label_1.setForeground(Color.white);
@@ -700,23 +695,27 @@ JPanel hlavny= new JPanel();
             }
       }
       /// znovu načítanie comboboxu po do defautnehoi boxu pre aktualne hodnoty
-      public void refreshComboBox() {
+      public static void refreshComboBox() {
             try {
                 String query = "SELECT id FROM membership_cards WHERE member_name IS NULL LIMIT 1;";
                 Connection c = DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);
                 java.sql.Statement statement = c.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
         
-                ComboBoxModel<Object> comboBoxModel = new DefaultComboBoxModel<>();
+            //     ComboBoxModel<Object> model = new DefaultComboBoxModel<>();
                 
-                while (resultSet.next()) {
-                    String addData = resultSet.getString(1);
-                    ((DefaultComboBoxModel<Object>) comboBoxModel).addElement(addData);
-                }
-        
+            //     while (resultSet.next()) {
+            //         String addData = resultSet.getString(1);
+            //         ((DefaultComboBoxModel<Object>) model).addElement(addData);
+            //     }
+            DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>();
+                  while (resultSet.next()) {
+                        int i = resultSet.getInt(1);
+                        model.addElement(i);
+                  }
                 c.close();
         
-                combo_2.setModel(comboBoxModel); // Nastaví nový model do JComboBox
+                combo_2.setModel(model); // Nastaví nový model do JComboBox
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Refresh is Not Correct !!!");

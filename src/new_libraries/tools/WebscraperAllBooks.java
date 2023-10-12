@@ -31,7 +31,7 @@ public class WebscraperAllBooks {
                   //  databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21") ; // FANTASY žáner
                 //  WebscraperAllBooks.databaseAllBooks("https://www.databazeknih.cz/zanry/fantasy-21");   
                  //  allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/pohadky-77");//rozpravky 
-                    allBooks=  databaseAllBooks("https://www.databazeknih.cz/zanry/encyklopedie-74");//enciklopedis
+                    books=  databaseAllBooks("https://www.databazeknih.cz/zanry/erotiky-40");//enciklopedis
 
     }
 

@@ -152,36 +152,27 @@ AddNewBookPanel(){
 }
 @Override
       public void actionPerformed(ActionEvent e) {      
-           
-            if(e.getSource()==button){   
+            
+            if(e.getSource()==button){ 
+                  for(JTextField f :fielList){
+                        String s= f.getText();
+                        if(s.isEmpty()){
+                              JOptionPane.showMessageDialog(null, "Zadajte požadované hodnoty !!", "title", JOptionPane.ERROR_MESSAGE);
+                        }
+                  }  
                   String title = titleTf.getText();  
                   String author= authorTf.getText();
                   String genre = genreTf.getText();
                   Double amout = Double.parseDouble(amoutTf.getText());
                   Binding binding = Binding.valueOf(bindingTf.getText());  
-                  for(JTextField field :fielList){
-                         if(field.getText()!=null || !field.getText().isEmpty()){
-                               System.out.println(" toto tuto sa poslalo");
-                               SqlFunctions.insertNewBookToDatabaseTableBooks(title, author, genre, amout, binding);
-                         }if(field.getText()==null || field.getText().isEmpty()){
-                               JOptionPane.showMessageDialog(null, "Zadajte požadované hodnoty !!", "title", JOptionPane.ERROR_MESSAGE);
-                         }
-                   }         
-                  // if(bindingTf.getText().equals( String.valueOf( Binding.hard.getPoradie() ) )  ) {
-                  //      System.out.println(" enum sa nezhoduje s hodnotami ktoré ste zadali");
-                  //       JOptionPane.showMessageDialog(null, "Zadajte požadované hodnoty !!", "title", JOptionPane.ERROR_MESSAGE);
-                  // }
-                 refreshComboBox();
-
+                  SqlFunctions.insertNewBookToDatabaseTableBooks(title, author, genre, amout, binding);
                   JOptionPane.showMessageDialog(null, "Kniha bola úspašne pridaná do databázy :)", "úspech :))", JOptionPane.INFORMATION_MESSAGE);
-
-                 
+                  refreshComboBox();
+                  for(JTextField f :fielList){
+                        f.setText("");
+                  }     
             }
-            for(JTextField foo :fielList){
-                  if(e.getSource()==foo){
-                       System.out.println("pisaut");
-                  }
-            }
+           
             if(e.getSource()==cmb){
                   String selectedGender = String.valueOf(cmb.getSelectedItem());
                   genreTf.setText(selectedGender);
@@ -190,7 +181,6 @@ AddNewBookPanel(){
                   String selectedBinding = String.valueOf(cmb_2.getSelectedItem());
                   bindingTf.setText(selectedBinding);
             }
-
 
       }
 

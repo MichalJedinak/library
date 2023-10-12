@@ -189,6 +189,8 @@ public class DeletePersonPanel extends JPanel implements ActionListener {
             if(e.getSource()==delete){
                   label.setForeground(Color.red);
                   deletePersonFromDatabaseTable();
+                  refreshDeleteComboBoxData();
+                  AddNewPesronPanel.refreshComboBox();
                   this.repaint();
             }
       }
