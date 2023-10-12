@@ -104,10 +104,13 @@ button {
         font-weight: 600;
     }
     .active{
-        background: linear-gradient(to right,hsl(187, 100%, 62%),hsl(204 100% 59%));
+        background: linear-gradient(to right,hsl(244, 100%, 62%),hsl(224, 100%, 59%),hsl(204 100% 59%),hsl(184, 100%, 59%));
+    }
+    .active_1{
+        background: linear-gradient(to right,hsl(244, 100%, 62%),hsl(224, 100%, 59%),hsl(204 100% 59%),hsl(184, 100%, 59%));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: #fff 1px;
+        -webkit-text-stroke: #fff .75px;
     }
     .run{
       animation-name: slowHiden;
@@ -126,9 +129,9 @@ button {
 </head>  
 <body>  
 
-    <header>
+    <header id="a">
 
-        <h1 id="a" >Prihlasovací formulár </h1>  
+        <h1  >Prihlasovací formulár </h1>  
     </header>
   <main class="body">
   
@@ -166,12 +169,13 @@ button {
 
     function a() {
           const a = document.getElementById("a");
-          a.style.background= "linear-gradient(to right, hsl(187, 100%, 62%),  hsl(204 ,100%, 59%) )";  
-          a.classList.remove("active");
+             a.classList.remove("active_1");
+             a.classList.add("active");
         }
       function b() {
-          const a = document.getElementById("a");         
-          a.classList.add("active");
+          const a = document.getElementById("a"); 
+          a.classList.remove("active");      
+          a.classList.add("active_1");
       }
       function c() {
           const a = document.getElementById("a");         
