@@ -132,6 +132,12 @@ public class JavaTable  extends JFrame{
                         
                   }
                   table.setModel(defaultModel);// tabulke nastavíme model
+                  table.getColumnModel().getColumn(0).setPreferredWidth(6);
+                  table.getColumnModel().getColumn(1).setPreferredWidth(150);
+                  table.getColumnModel().getColumn(2).setPreferredWidth(50);
+                  table.getColumnModel().getColumn(3).setPreferredWidth(50);
+
+
                  /*A uzavrieme spojenie a čo treba */
                   connection.close();
                   statement.close();
