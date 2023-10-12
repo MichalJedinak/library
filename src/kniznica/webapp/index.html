@@ -103,24 +103,42 @@ button {
         padding-bottom: 2px;
         font-weight: 600;
     }
+    .active{
+        background: linear-gradient(to right,hsl(187, 100%, 62%),hsl(204 100% 59%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: #fff 1px;
+    }
+    .run{
+      animation-name: slowHiden;
+      animation-duration: 3s;  
+     animation-timeline: initial;
+    }
 
+@keyframes slowHiden{
+    0%{
+        opacity: 1;
+    }100%{
+        opacity: 0;
+    }
+}
 </style> 
 </head>  
 <body>  
 
     <header>
 
-        <h1>Prihlasovací formulár </h1>  
+        <h1 id="a" >Prihlasovací formulár </h1>  
     </header>
   <main class="body">
   
     <form action="/my-url" method="post">
         <div class="container"> 
             <label>Username : </label> 
-            <input pattern="[A-Za-z0-9]{}" title="Musí obsahovať min 4 znaky" type="text" placeholder="Enter User Name" name="user_name" required>
+            <input onclick="a()" pattern="[A-Za-z0-9]{}" title="Musí obsahovať min 4 znaky" type="text" placeholder="Enter User Name" name="user_name" required>
 
             <label>Password : </label> 
-            <input pattern="[A-Za-z0-9._+-#@>]{}" title="Min 8 znakov " type="password" placeholder="Enter Password" name="password" required>
+            <input id="p" onclick="b()" pattern="[A-Za-z0-9._+-#@>]{}" title="Min 8 znakov " type="password" placeholder="Enter Password" name="password" required>
 
             <button type="submit" name="submit">Login</button> 
 
@@ -129,7 +147,7 @@ button {
             <input type="checkbox" checked="checked" placeholder="none" name="checkbox" value="woman"> Woman 
             <input type="checkbox" checked="checked" placeholder="none" name="checkbox" value="other"> Other 
 
-            <button type="button" class="cancelbtn" name="cancelbtn"> Cancel</button> 
+            <button onclick="c()" type="button" class="cancelbtn" name="cancelbtn"> Cancel</button> 
             <p><strong>Forgot</strong>  <a href="#"> password? </a> </p>
         </div> 
     </form>  
@@ -146,6 +164,19 @@ button {
     const Michal = new user("Michal",47);
     console.log(Michal);
 
+    function a() {
+          const a = document.getElementById("a");
+          a.style.background= "linear-gradient(to right, hsl(187, 100%, 62%),  hsl(204 ,100%, 59%) )";  
+          a.classList.remove("active");
+        }
+      function b() {
+          const a = document.getElementById("a");         
+          a.classList.add("active");
+      }
+      function c() {
+          const a = document.getElementById("a");         
+          a.classList.add("run");
+      }
 </script>
 </main>
 </body>   
