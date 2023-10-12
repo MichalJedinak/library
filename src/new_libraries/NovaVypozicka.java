@@ -45,7 +45,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
             Image i = img.getScaledInstance(45, 20, Image.SCALE_SMOOTH);
             ImageIcon scI= new ImageIcon(i);
             vratenie.setIcon(scI);
-
+      
             comboBox = new JComboBox<String>();
             selectPersonFromDatabase();
             comboBox.setPreferredSize(new Dimension(300,30));
@@ -264,12 +264,13 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                   ResultSet resultSet = statement.executeQuery(query);
                   DefaultTableModel model = new DefaultTableModel();
                   java.sql.ResultSetMetaData rsmd = resultSet.getMetaData();
-                  int columns = rsmd.getColumnCount();// zistíme počet stĺpcou
+                  int columns = rsmd.getColumnCount();// zistíme počet stĺpcou                  
                   String[] columnsName = new String[columns];// vytvoríme pole stringov pre názvy columns 
+                  
                   for(int i = 0; i<columns;i++)
                   columnsName[i]=rsmd.getColumnName(i+1);// použijeme get column Name s resulset meta data
                   model.setColumnIdentifiers(columnsName);//  default modelu nastavíme identifikované stĺpce
-                  DefaultTableModel emptyModel = new DefaultTableModel();
+                  DefaultTableModel emptyModel = new DefaultTableModel();                  
                   emptyModel.setColumnIdentifiers(columnsName);
                   if(!resultSet.next()){                    
                         String[] emptyData={null};
@@ -285,6 +286,7 @@ public class NovaVypozicka extends JFrame implements ActionListener{
                               String[]  data ={selectId,title,autor};                      
                               model.addRow(data);
                               table.setModel(model);
+                              table.getColumnModel().getColumn(0).setPreferredWidth(5);;
                         } while (resultSet.next()) ;
                   }
                  
@@ -318,6 +320,8 @@ public class NovaVypozicka extends JFrame implements ActionListener{
              
                   model.addRow(data);
                   table_1.setModel(model);
+                  table_1.getColumnModel().getColumn(0).setPreferredWidth(5);;
+
                   
                   }
                   connection.close();     
