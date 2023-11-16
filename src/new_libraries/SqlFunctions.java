@@ -244,7 +244,7 @@ public static ArrayList<String> x ;
       public static void showNameFromDatabaseTablePersons() {
             
               nameToSearch = AddNewPesronPanel.nameField.getText();//  nastaviť na string z fieldu
-              //if (!nameToSearch.isEmpty()) {                    
+              if (!nameToSearch.isEmpty()) {                    
                     try {
                     Connection connection = DriverManager.getConnection(url, username, password);             
                     Statement statement = connection.createStatement();
@@ -263,7 +263,7 @@ public static ArrayList<String> x ;
                     } catch (SQLException ex) {
                     ex.printStackTrace();
                     }
-             // }
+              }
         }
 
         public static void refreschDatabase(){

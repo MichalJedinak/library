@@ -1,0 +1,81 @@
+Dependecy  pre rozbehanie test  v pom.xml
+
+<dependency>
+	<groupId>org.junit.jupiter</groupId>
+	<artifactId>junit-jupiter</artifactId>
+	<version>5.8.2</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>runtime</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+	<scope>test</scope>
+</dependency>
+
+///////////////////////////////////////////////////////////////
+Do aplication.properties
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:shop
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+//////////////////////////////////////////////////////////////
+Do schema.sql  nahradiť AUTO_INCREMENT  za INDENTITY  a bouble za DECIMAL(int,int)
+
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
+   id int(11) NOT NULL IDENTITY,
+  name varchar(45) NOT NULL,
+  surname varchar(45) NOT NULL,
+  email varchar(45) NOT NULL,
+  address varchar NOT NULL,
+  age int(11) DEFAULT NULL,
+  phone_number varchar DEFAULT NULL
+);
+
+DROP TABLE IF EXISTS merchant;
+CREATE TABLE merchant ( 
+  id int(11) NOT NULL IDENTITY ,
+  name varchar(45) NOT NULL,
+  email varchar(45) NOT NULL,
+  address varchar(45) NOT NULL
+);
+
+DROP TABLE IF EXISTS product;
+CREATE TABLE product (
+  id int(11) NOT NULL IDENTITY ,
+  merchant_id int(11) NOT NULL, 
+  name varchar(45) NOT NULL,
+  description varchar(120) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  created_at datetime NOT NULL,
+  available int(11) NOT NULL 
+);
+
+/////////////////////////////////////////////////////////////
+Ak máte problém s Assertr.assertEquals(  ako ja ) 
+použite  len tieto importy 
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+class ShopApplicationTests {
+
+	@Test
+	void contextLoads() {
+		int a =2;
+		int b = 2;
+		assertEquals(4, a +  b, "rovna sa :)");
+	
+	}
+
+}
