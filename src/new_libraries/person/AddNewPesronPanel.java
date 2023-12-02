@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Scanner;
 
-public class AddNewPesronPanel extends JFrame implements ActionListener {
+public class AddNewPesronPanel extends JFrame  implements ActionListener {
       //  6 udajov - meno, str.meno,priezvysko, carta,pohlavie adresa
    public static   boolean usSelImg;
       String name;
@@ -52,13 +52,13 @@ JPanel hlavny= new JPanel();
       JLayeredPane editPanel = new JLayeredPane();
       JPanel imagePanel = new JPanel();
       String[] i = {"man","woman"};
-      JComboBox<Object> combo_1 = new JComboBox<>(i); //  pre pohlavie
+      JComboBox<String> combo_1 = new JComboBox<>(i); //  pre pohlavie
       JPanel column = new JPanel();
       JPanel column_1 = new JPanel();
       JPanel colum_3 = new JPanel();//  pre comob_3 a ctyField
       JPanel colum_4 = new JPanel(); // pre combo_4 a postCode fieled
       //String [] comboData_2;
-      static JComboBox<Object> combo_2 ; // pre členskú kartu
+      static JComboBox<String> combo_2 ; // pre členskú kartu
       JComboBox<String> combo_3; // pre mestá
       JComboBox<String> combo_4;//  pre post code
       public static JTextField nameField = new JTextField(16);
@@ -87,7 +87,7 @@ JPanel hlavny= new JPanel();
       ArrayList<JTextField>fieldList = new ArrayList<>();
       ArrayList<JTextField> setingTextFileds ;
       ArrayList<JTextField> addAndRemoveFields;
-      ArrayList<JComboBox> comboList = new ArrayList<>();
+      ArrayList<JComboBox<String>> comboList = new ArrayList<JComboBox<String>>();
       int widht = 800;
       int height = 620;
       int scaleHeight =800;
@@ -412,7 +412,13 @@ JPanel hlavny= new JPanel();
             combo_4.setPreferredSize(new Dimension(70, 30));
             combo_4.addActionListener(this);
 
-            comboList.add(combo_1);comboList.add(combo_2);comboList.add(combo_3);comboList.add(combo_4);
+            try {
+                  comboList.add(combo_1);
+                  comboList.add(combo_2);
+            } catch (Exception e1) {
+                  e1.printStackTrace();
+            }
+            comboList.add(combo_3);comboList.add(combo_4);
 
             ///////////  pole fieldov v ktorých chcem robiť zmeny farby textu etc...
             setingTextFileds = new ArrayList<>();
@@ -482,11 +488,14 @@ JPanel hlavny= new JPanel();
             hlavny.add(infoLabel);
             hlavny.add(editPanel);            
             hlavny.add(imagePanel);
+           
             hlavny.add(button);
             frame.add(hlavny);
             //frame.add(buttonPanel);
             frame.add(up);
             frame.add(del);
+
+            
             hlavny.setVisible(true);
             buttonPanel.setVisible(false);
             up.setVisible(false);
@@ -564,7 +573,7 @@ JPanel hlavny= new JPanel();
                         for(JTextField a:addAndRemoveFields){
                             a.setBackground(new Color(95, 159, 160)); 
                         }
-                        for(JComboBox c: comboList){
+                        for(JComboBox<String> c: comboList){
                               c.setVisible(false);c.setBackground(new Color(95, 159, 160));
                         }
                         for(JTextField field :fieldList){                                           
@@ -582,7 +591,7 @@ JPanel hlavny= new JPanel();
                               for(JTextField field :fieldList){
                                     field.setEditable(true);                                    
                               }
-                        for(JComboBox c: comboList){
+                        for(JComboBox<String> c: comboList){
                               c.setVisible(true);c.setBackground(Color.white);
                         }
                   }
@@ -598,7 +607,7 @@ JPanel hlavny= new JPanel();
                   for(JTextField f : fieldList){
                         f.setText("");f.setEditable(true);f.setFocusable(true);f.setBackground(Color.white);
                   }
-                  for(JComboBox c: comboList){
+                  for(JComboBox<String> c: comboList){
                       c.setVisible(true);c.setBackground(Color.white);
                   }
                   label_1.setForeground(Color.white);
@@ -655,14 +664,15 @@ JPanel hlavny= new JPanel();
                   fieldList.add(midleNameField); fieldList.add(postCode);
                   fieldList.add(streetField); fieldList.add(cityFiled); 
                  for(JTextField f :fieldList){ //  nastavíme fieldom prázdny text a bielu farbu
-                  f.setEditable(true);f.setFocusable(true);f.setBackground(Color.white);
+                  f.setEditable(true);f.setFocusable(true);
+                  f.setBackground(Color.white);
                   f.setText("");
                  }
                  for(JTextField f:setingTextFileds){ //  pre povinné nasatvíme čo treba
                         f.setText("povinný údaj");
                         f.setForeground(Color.lightGray);
                   }       
-                 for(JComboBox c: comboList){ //  znovu zvyditeľníme combo boxs
+                 for(JComboBox<String> c: comboList){ //  znovu zvyditeľníme combo boxs
                               c.setVisible(true);c.setBackground(Color.white);
                         }
                  cleareByteFromTxtAndSetIconInImageLabel();//  zmaže byte.txt a zmení icon v imagelabel
@@ -681,10 +691,11 @@ JPanel hlavny= new JPanel();
             Connection c = DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);
             Statement statement = c.createStatement();
             ResultSet resultSet = statement.executeQuery(query);    
-            combo_2 = new JComboBox<Object>() ;
+            combo_2 = new JComboBox<String>() ;
             while (resultSet.next()) {
-                  int i = resultSet.getInt(1);                    
-                  combo_2.addItem(i);                      
+                  int i = resultSet.getInt(1);   
+                  String intToString= String.valueOf(i)   ;              
+                  combo_2.addItem(intToString);                      
             }
           //  System.out.println(i);
             c.close();
@@ -708,10 +719,11 @@ JPanel hlavny= new JPanel();
             //         String addData = resultSet.getString(1);
             //         ((DefaultComboBoxModel<Object>) model).addElement(addData);
             //     }
-            DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>();
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
                   while (resultSet.next()) {
                         int i = resultSet.getInt(1);
-                        model.addElement(i);
+                        String intStr= String.valueOf(i);
+                        model.addElement(intStr);
                   }
                 c.close();
         

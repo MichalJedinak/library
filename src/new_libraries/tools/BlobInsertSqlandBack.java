@@ -166,15 +166,16 @@ public class BlobInsertSqlandBack extends JFrame{
       }
 
       public void insetFotoToDtatabaseBLOP(){
-
+            File f= new File(getName());
             File file = new File("src\\new_libraries\\person\\resources\\obrazok.jpg");
             try {
-                  FileInputStream fis = new FileInputStream(file);
+                  f= file;
+                  FileInputStream fis = new FileInputStream(f);
 
                   String query = "INSERT INTO BLOP (foto) VALUE(?);";
                   Connection c = DriverManager.getConnection(SqlFunctions.url, SqlFunctions.username, SqlFunctions.password);
                   PreparedStatement pr = c.prepareStatement(query);
-                  pr.setBinaryStream(1, fis, (int) file.length());
+                  pr.setBinaryStream(1, fis, (int) f.length());
                   pr.executeUpdate();
 
                   JOptionPane.showMessageDialog(null, "OBRAZOK SA PRIDAL DO DATABAZY");
